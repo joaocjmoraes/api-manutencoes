@@ -3,10 +3,10 @@ package com.joao.manutencoes.controller;
 import com.joao.manutencoes.model.Manutencao;
 import com.joao.manutencoes.service.ManutencaoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/manutencao")
@@ -15,28 +15,34 @@ public class ManutencaoController {
     @Autowired
     private ManutencaoService manutencaoService;
 
-    // Criar ou atualizar manutenção
-    @PostMapping
-    public Manutencao createManutencao(@RequestBody Manutencao manutencao) {
-        return manutencaoService.saveManutencao(manutencao);
-    }
-
-    // Buscar todas as manutenções
+    // Rota para obter todas as manutenções
     @GetMapping
     public List<Manutencao> getAllManutencao() {
         return manutencaoService.getAllManutencao();
     }
 
-    // Buscar por ID
-    @GetMapping("/{id}")
-    public Optional<Manutencao> getManutencaoById(@PathVariable Long id) {
-        return manutencaoService.getManutencaoById(id);
+    // Rota para adicionar uma nova manutenção
+    @PostMapping
+    public Manutencao createManutencao(@RequestBody Manutencao manutencao) {
+        return manutencaoService.createManutencao(manutencao);
     }
 
-    // Deletar por ID
+    // Rota para atualizar uma manutenção existente
+    @PutMapping("/{id}")
+    public ResponseEntity<Manutencao> updateManutencao(@PathVariable Long id, @RequestBody Manutencao manutencao) {
+        Manutencao updatedManutencao = manutencaoService.updateManutencao(id, manutencao);
+        if (updatedManutencao != null) {
+            return ResponseEntity.ok(updatedManutencao);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    // Rota para excluir uma manutenção
     @DeleteMapping("/{id}")
-    public void deleteManutencao(@PathVariable Long id) {
-        manutencaoService.deleteManutencao(id);
+    public ResponseEntity<Void> deleteManutencao(@PathVariable Long id) {
+        if (manutencaoService.deleteManutencao(id)) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }
-

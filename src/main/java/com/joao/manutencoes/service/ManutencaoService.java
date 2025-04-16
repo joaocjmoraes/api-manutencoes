@@ -14,23 +14,33 @@ public class ManutencaoService {
     @Autowired
     private ManutencaoRepository manutencaoRepository;
 
-    // Criar ou atualizar manutenção
-    public Manutencao saveManutencao(Manutencao manutencao) {
-        return manutencaoRepository.save(manutencao);
-    }
-
-    // Buscar todas as manutenções
+    // Obter todas as manutenções
     public List<Manutencao> getAllManutencao() {
         return manutencaoRepository.findAll();
     }
 
-    // Buscar por ID
-    public Optional<Manutencao> getManutencaoById(Long id) {
-        return manutencaoRepository.findById(id);
+    // Criar uma nova manutenção
+    public Manutencao createManutencao(Manutencao manutencao) {
+        return manutencaoRepository.save(manutencao);
     }
 
-    // Deletar por ID
-    public void deleteManutencao(Long id) {
-        manutencaoRepository.deleteById(id);
+    // Atualizar uma manutenção
+    public Manutencao updateManutencao(Long id, Manutencao manutencao) {
+        Optional<Manutencao> existingManutencao = manutencaoRepository.findById(id);
+        if (existingManutencao.isPresent()) {
+            manutencao.setId(id);
+            return manutencaoRepository.save(manutencao);
+        }
+        return null; // Retorna null se não encontrar o id
+    }
+
+    // Deletar uma manutenção
+    public boolean deleteManutencao(Long id) {
+        Optional<Manutencao> manutencao = manutencaoRepository.findById(id);
+        if (manutencao.isPresent()) {
+            manutencaoRepository.deleteById(id);
+            return true;
+        }
+        return false; // Retorna false se não encontrar o id
     }
 }
