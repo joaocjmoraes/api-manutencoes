@@ -46,5 +46,3 @@ public class ManutencaoController {
         return ResponseEntity.notFound().build();
     }
 }
-
-
