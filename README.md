@@ -41,7 +41,7 @@ src/
 1. Clone o repositório:
    ```bash
    git clone https://github.com/joaocjmoraes/api-manutencoes.git
-   cd manutencoes
+   cd api-manutencoes
    ```
 
 2. Importe o projeto no Eclipse como "Maven Project".
