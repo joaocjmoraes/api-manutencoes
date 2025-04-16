@@ -109,5 +109,5 @@ git push origin feature/nome-da-tarefa
 
 ## Autor
 
-Desenvolvido por João  
+Desenvolvido por João Antônio Moraes 
 Repositório: [https://github.com/joaocjmoraes/api-manutencoes](https://github.com/joaocjmoraes/api-manutencoes)
