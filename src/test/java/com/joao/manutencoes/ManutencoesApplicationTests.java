@@ -1,4 +1,4 @@
-package com.manutencao.manutencoes;
+package com.joao.manutencoes;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
