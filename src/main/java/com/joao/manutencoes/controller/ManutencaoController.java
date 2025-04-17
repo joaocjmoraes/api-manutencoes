@@ -5,6 +5,7 @@ import com.joao.manutencoes.service.ManutencaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -23,13 +24,16 @@ public class ManutencaoController {
 
     // Rota para adicionar uma nova manutenção
     @PostMapping
-    public Manutencao createManutencao(@RequestBody Manutencao manutencao) {
+    public Manutencao createManutencao(@RequestBody @Valid Manutencao manutencao) {
         return manutencaoService.createManutencao(manutencao);
     }
 
     // Rota para atualizar uma manutenção existente
     @PutMapping("/{id}")
-    public ResponseEntity<Manutencao> updateManutencao(@PathVariable Long id, @RequestBody Manutencao manutencao) {
+    public ResponseEntity<Manutencao> updateManutencao(
+            @PathVariable Long id,
+            @RequestBody @Valid Manutencao manutencao
+    ) {
         Manutencao updatedManutencao = manutencaoService.updateManutencao(id, manutencao);
         if (updatedManutencao != null) {
             return ResponseEntity.ok(updatedManutencao);
