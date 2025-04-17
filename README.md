@@ -11,11 +11,11 @@ API REST desenvolvida em Java com Spring Boot para gerenciamento de manutençõe
 - Java 21
 - Spring Boot
   - Spring Web
-  - Spring Data JPA
+  - Spring Data JPA (Hibernate)
   - H2 Database
+  - Swagger
 - Maven
 - Git
-- Postman (para testes)
 
 ---
 
@@ -67,13 +67,15 @@ src/
 
 ---
 
-## Testando com Postman
-
-### Exemplo de corpo JSON para POST/PUT:
+## Corpo JSON para testes POST:
 ```json
 {
-  "descricao": "Troca de cartucho",
-  "data": "16/04"
+  "descricao": "Troca de cartuchos",
+  "data": "2025-04-17",
+  "local": "Setor 1",
+  "responsavel": "João",
+  "tipo": "Preventiva",
+  "status": "PENDENTE"
 }
 ```
 
