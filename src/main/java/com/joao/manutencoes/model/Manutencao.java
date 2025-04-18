@@ -8,6 +8,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 
 
@@ -18,23 +19,23 @@ public class Manutencao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "A descrição não pode estar em branco.")
+    @Size(min = 5, max = 150, message = "A descrição deve ter entre 5 e 150 caracteres.")
     private String descricao;
 
-    @NotNull
+    @NotNull(message = "A data da manutenção é obrigatória.")
     private LocalDate data;
 
-    @NotBlank
+    @NotBlank(message = "O local da manutenção é obrigatório.")
     private String local;
 
-    @NotBlank
+    @NotBlank(message = "O responsável pela manutenção é obrigatório.")
     private String responsavel;
 
-    @NotBlank
     private String tipo;
 
+    @NotNull(message = "O status da manutenção é obrigatório (PENDENTE, EM_ANDAMENTO ou CONCLUIDA).")
     @Enumerated(EnumType.STRING)
-    @NotNull
     private Status status;
 
     // Getters e setters
